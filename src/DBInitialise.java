@@ -15,7 +15,7 @@ public class DBInitialise {
         try {
             // create a connection to the database
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Successful connection");
+            System.out.println("Successful DB connection");
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -33,6 +33,16 @@ public class DBInitialise {
         }
     }
 
+    public final void open(){
+        try {
+            // create a connection to the database
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Successful DB connection");
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     /**
      * Close database
      * <p>
@@ -42,7 +52,7 @@ public class DBInitialise {
     public final void close() {
         try {
             conn.close();
-            System.out.println("Successfully closed connection");
+            System.out.println("Successfully closed DB connection");
         } catch (Exception e) {
             notify("Db.close", e);
         }

@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
@@ -29,13 +30,13 @@ public class UserInterface {
     Stage window;
     Scene menuScene;
     DBInitialise conn;
-    final int width = 1280;
-    final int height = 720;
+    final int width = 1920;
+    final int height = 1080;
 
     public UserInterface(Stage w){
         window = w;
-        window.setWidth(width);
-        window.setHeight(height);
+        window.setWidth(1280);
+        window.setHeight(720);
         constructMainInterface();
     }
 
@@ -65,8 +66,8 @@ public class UserInterface {
         for(int i = 0; i < buttons.length; i++){
             buttons[i].setTextAlignment(TextAlignment.CENTER);
             buttons[i].setId("button");
-            buttons[i].setPrefSize(200, 100);
-            buttons[i].setTranslateX(440 + i * (buttons[i].getPrefWidth()+50));
+            buttons[i].setPrefSize(350, 150);
+            buttons[i].setTranslateX(590 + i * (buttons[i].getPrefWidth()+50));
             buttons[i].setTranslateY(height/2-(buttons[i].getPrefHeight()/2));
         }
         mainMenu.getChildren().addAll(buttons);
@@ -106,14 +107,24 @@ public class UserInterface {
         Button back = new Button("Main Menu");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)
+            {
+                conn.close();
                 constructMainInterface();
             }
         });
         back.setId("button");
-        back.setPrefSize(150, 50);
+        back.setPrefSize(200, 50);
         back.setTextAlignment(TextAlignment.CENTER);
         mainMenu.getChildren().add(back);
+        //Background
+        Rectangle box = new Rectangle();
+        box.setTranslateX((width-1600)/2);
+        box.setTranslateY((height-900)/2);
+        box.setId("box");
+        box.setWidth(1600);
+        box.setHeight(900);
+        mainMenu.getChildren().add(box);
         //Text box
         String name = "";
         String statement = "SELECT * FROM creature_template WHERE entry = 197";
@@ -122,13 +133,17 @@ public class UserInterface {
             while (rows.next()) {
                 name = rows.getString("name");
             }
-            conn.close();
         } catch(SQLException ex){
             ex.printStackTrace();
         }
+        Label npcName = new Label("NPC Name: ");
         TextField entry = new TextField(name);
+        npcName.setId("label");
+        entry.setTranslateY(100);
+        npcName.setTranslateY(100);
+        entry.setTranslateX(100);
         entry.setMaxWidth(entry.getText().length()*10);
-        mainMenu.getChildren().add(entry);
+        mainMenu.getChildren().addAll(entry, npcName);
         //Background
         mainMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
         Image backImg = new Image("CSS/Assets/WoWPortal.jpg");
@@ -152,6 +167,10 @@ public class UserInterface {
         window.setScene(menuScene);
         window.getScene().getStylesheets().add("css/main.css");
         window.show();
+    }
+
+    public void closeConnection(){
+        conn.close();
     }
 
 }
