@@ -60,3 +60,53 @@
 #box {
     -fx-fill: linear-gradient(rgba(15, 168, 10, 0.75), rgba(0, 0, 0, 0.75));
 }
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #000000,
+                          linear-gradient(#b26607, #512d00),
+                          linear-gradient(#b26607, #512d00),
+                          linear-gradient(#b26607, #512d00);
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:90px;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #000000,
+                          linear-gradient(#f99a00, #703f01),
+                          linear-gradient(#f99a00, #703f01),
+                          linear-gradient(#f99a00, #703f01);
+    -fx-background-radius: 10,10,10,10;
+    -fx-border-color: black;
+    -fx-border-radius: 10,10,10,10;
+}
+.tab-pane .tab:hover{
+    -fx-border-color: white;
+}
+.tab-pane .tab:selected
+{
+    -fx-background-color: #000000,
+                          linear-gradient(#b26607, #512d00),
+                          linear-gradient(#b26607, #512d00),
+                          linear-gradient(#b26607, #512d00);
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.tab-pane:top *.tab-header-area {
+    -fx-background-insets: 0, 0 0 1 0;
+ /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+}
+.tab-pane:focused{
+    -fx-focus-color: rgba(0,0,0,0);
+}

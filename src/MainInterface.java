@@ -48,7 +48,7 @@ public class MainInterface {
             buttons[i].setTextAlignment(TextAlignment.CENTER);
             buttons[i].setId("button");
             buttons[i].setPrefSize(250, 150);
-            buttons[i].setTranslateX(640 + i * (buttons[i].getPrefWidth()+100));
+            buttons[i].setTranslateX(340 + i * (buttons[i].getPrefWidth()+100));
             buttons[i].setTranslateY(ui.height/2-(buttons[i].getPrefHeight()/2));
         }
         mainMenu.getChildren().addAll(buttons);
@@ -76,7 +76,7 @@ public class MainInterface {
         //Create Window
         ui.window.setScene(ui.windowScene);
         ui.window.getScene().getStylesheets().add("css/main.css");
-        ui.window.setTitle("TrinityDB Tool");
+        ui.window.setTitle("TrinityDB 5.4.8 Tool");
         ui.window.show();
     }
 

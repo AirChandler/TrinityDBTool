@@ -5,8 +5,8 @@ public class UserInterface {
     Stage window;
     Scene windowScene;
     DBInitialise conn;
-    final int width = 1920;
-    final int height = 1080;
+    final int width = 1280;
+    final int height = 720;
 
     public UserInterface(Stage w){
         window = w;
