@@ -22,6 +22,8 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserInterface {
     Stage window;
@@ -98,6 +100,9 @@ public class UserInterface {
 
     private void constructDBInterface(){
         StackPane mainMenu = new StackPane();
+        mainMenu.setAlignment(Pos.TOP_LEFT);
+        menuScene = new Scene(mainMenu);
+        //BackButton
         Button back = new Button("Main Menu");
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -108,11 +113,24 @@ public class UserInterface {
         back.setId("button");
         back.setPrefSize(150, 50);
         back.setTextAlignment(TextAlignment.CENTER);
-        mainMenu.getChildren().addAll(back);
-        mainMenu.setAlignment(Pos.TOP_LEFT);
-        mainMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
-        menuScene = new Scene(mainMenu);
+        mainMenu.getChildren().add(back);
+        //Text box
+        String name = "";
+        String statement = "SELECT * FROM creature_template WHERE entry = 197";
+        ResultSet rows = conn.processQuery(statement);
+        try {
+            while (rows.next()) {
+                name = rows.getString("name");
+            }
+            conn.close();
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        TextField entry = new TextField(name);
+        entry.setMaxWidth(entry.getText().length()*10);
+        mainMenu.getChildren().add(entry);
         //Background
+        mainMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
         Image backImg = new Image("CSS/Assets/WoWPortal.jpg");
         ImagePattern pattern = new ImagePattern(backImg);
         menuScene.setFill(pattern);

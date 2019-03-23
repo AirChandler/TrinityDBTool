@@ -16,7 +16,6 @@ public class DBInitialise {
             // create a connection to the database
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Successful connection");
-            conn.close();
         } catch(SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -42,8 +41,8 @@ public class DBInitialise {
      */
     public final void close() {
         try {
-            conn.commit(); // Commit any updates
             conn.close();
+            System.out.println("Successfully closed connection");
         } catch (Exception e) {
             notify("Db.close", e);
         }
