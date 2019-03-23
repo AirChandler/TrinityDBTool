@@ -5,19 +5,13 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Scale;
-import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class MainInterface {
     UserInterface ui;
@@ -53,8 +47,8 @@ public class MainInterface {
         for(int i = 0; i < buttons.length; i++){
             buttons[i].setTextAlignment(TextAlignment.CENTER);
             buttons[i].setId("button");
-            buttons[i].setPrefSize(350, 150);
-            buttons[i].setTranslateX(590 + i * (buttons[i].getPrefWidth()+50));
+            buttons[i].setPrefSize(250, 150);
+            buttons[i].setTranslateX(640 + i * (buttons[i].getPrefWidth()+100));
             buttons[i].setTranslateY(ui.height/2-(buttons[i].getPrefHeight()/2));
         }
         mainMenu.getChildren().addAll(buttons);

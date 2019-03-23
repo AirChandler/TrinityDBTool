@@ -4,22 +4,26 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Scale;
-import javafx.stage.Stage;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBInterface {
     UserInterface ui;
+    Tab[] tab = {
+            new Tab("Creature_Template"),
+            new Tab("Other adasdsadassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
+            new Tab("hi"),
+            new Tab("Tab"),
+            new Tab("hello kevin")
+    };
 
     public DBInterface(UserInterface t){
         ui = t;
@@ -28,6 +32,13 @@ public class DBInterface {
 
     public void construct(){
         StackPane mainMenu = new StackPane();
+        StackPane subMenu = new StackPane();
+        subMenu.setAlignment(Pos.TOP_LEFT);
+        TabPane tabs = new TabPane();
+        tabs.setMinSize(ui.width, ui.height-tabs.getTranslateY());
+        tabs.setMaxSize(ui.width, ui.height-tabs.getTranslateY());
+        tabs.getTabs().addAll(tab);
+        tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         mainMenu.setAlignment(Pos.TOP_LEFT);
         ui.windowScene = new Scene(mainMenu);
         //BackButton
@@ -40,18 +51,21 @@ public class DBInterface {
                 ui.constructMainInterface();
             }
         });
-        back.setId("button");
+        back.setId("MenuButton");
         back.setPrefSize(200, 50);
         back.setTextAlignment(TextAlignment.CENTER);
+        tabs.setTranslateY(back.getPrefHeight()+5);
         mainMenu.getChildren().add(back);
         //Background
         Rectangle box = new Rectangle();
-        box.setTranslateX((ui.width-1600)/2);
-        box.setTranslateY((ui.height-900)/2);
+        box.setTranslateY(tabs.getTranslateY()+tabs.getTabMinHeight());
         box.setId("box");
-        box.setWidth(1600);
-        box.setHeight(900);
+        box.setWidth(ui.width);
+        box.setHeight(ui.height-(tabs.getTranslateY()+tabs.getTabMinHeight()));
         mainMenu.getChildren().add(box);
+        mainMenu.getChildren().add(tabs);
+        //Tab 0 content
+        tab[0].setContent(subMenu);
         //Text box
         String name = "";
         String statement = "SELECT * FROM creature_template WHERE entry = 197";
@@ -70,7 +84,7 @@ public class DBInterface {
         npcName.setTranslateY(100);
         entry.setTranslateX(100);
         entry.setMaxWidth(entry.getText().length()*10);
-        mainMenu.getChildren().addAll(entry, npcName);
+        subMenu.getChildren().addAll(entry, npcName);
         //Background
         mainMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
         Image backImg = new Image("CSS/Assets/WoWPortal.jpg");

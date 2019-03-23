@@ -13,6 +13,35 @@
     -fx-font-size: 22px;
 	-fx-font-weight: bold;
 	-fx-position: center;
+	-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.5) , 10, 10 , 10 , 10);
+}
+#button:hover{
+    -fx-background-color:
+        #000000,
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00);
+}
+#MenuButton {
+    -fx-background-color:
+        #000000,
+        linear-gradient(#f99a00, #703f01),
+        linear-gradient(#f99a00, #703f01),
+        linear-gradient(#f99a00, #703f01);
+    -fx-background-insets: 2, 2, 2, 2;
+    -fx-border-color:black;
+    -fx-border-width: 3;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+	-fx-font-weight: bold;
+	-fx-position: center;
+}
+#MenuButton:hover{
+    -fx-background-color:
+        #000000,
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00);
 }
 #label {
     -fx-background-color:
@@ -30,11 +59,4 @@
 }
 #box {
     -fx-fill: linear-gradient(rgba(15, 168, 10, 0.75), rgba(0, 0, 0, 0.75));
-}
-#button:hover{
-    -fx-background-color: 
-        #000000,
-        linear-gradient(#b26607, #512d00),
-        linear-gradient(#b26607, #512d00),
-        linear-gradient(#b26607, #512d00);
 }
