@@ -63,19 +63,28 @@ public class MainInterface {
         mainMenu.getTransforms().add(new Scale(ui.height/ui.height, ui.width/ui.width, 0, 0));
         ui.windowScene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                Scale scale = new Scale((double)newSceneWidth/ui.width, ui.window.getHeight()/ui.height, 0, 0);
+                Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
                 mainMenu.getTransforms().setAll(scale);
             }
         });
         ui.windowScene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                Scale scale = new Scale(ui.window.getWidth()/ui.width, (double)newSceneHeight/ui.height, 0, 0);
+                Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
+                mainMenu.getTransforms().setAll(scale);
+            }
+        });
+        ui.window.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
                 mainMenu.getTransforms().setAll(scale);
             }
         });
         //Create Window
         ui.window.setScene(ui.windowScene);
         ui.window.getScene().getStylesheets().add("css/main.css");
+        Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
+        mainMenu.getTransforms().setAll(scale);
         ui.window.setTitle("TrinityDB 5.4.8 Tool");
         ui.window.show();
     }

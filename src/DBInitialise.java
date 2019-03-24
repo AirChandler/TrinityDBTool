@@ -3,8 +3,8 @@ import java.sql.*;
 public class DBInitialise {
     // db parameters
     String url       = "jdbc:mysql://localhost:3306/world";
-    String user      = "";
-    String password  = "";
+    String user      = "root";
+    String password  = "root";
     Connection conn = null;
     /**
      * Database meta data

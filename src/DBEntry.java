@@ -6,7 +6,7 @@ import javafx.scene.text.TextAlignment;
 
 public class DBEntry {
     TextField text;
-    public DBEntry(StackPane[] root, String label, String entry, int x, int y){
+    public DBEntry(StackPane root, String label, String entry, int x, int y){
         Label npcName = new Label(label);
         text = new TextField(entry);
         npcName.setPrefSize(100, 30);
@@ -16,7 +16,7 @@ public class DBEntry {
         text.setTranslateX(x+10);
         npcName.setTranslateX(text.getTranslateX()-npcName.getPrefWidth());
         text.setMaxWidth(200);
-        root[0].getChildren().addAll(text, npcName);
+        root.getChildren().addAll(text, npcName);
     }
 
     public String getID() {

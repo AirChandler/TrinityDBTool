@@ -6,11 +6,6 @@ public class Launchpad extends Application {
 
     public static void main(String args[]) {
         launch(args);
-        Launchpad main = new Launchpad();
-    }
-
-    public Launchpad() {
-
     }
 
     @Override

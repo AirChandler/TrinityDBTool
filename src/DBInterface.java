@@ -2,6 +2,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,6 +17,8 @@ import java.sql.SQLException;
 
 public class DBInterface {
     UserInterface ui;
+    boolean scaleW = false;
+    boolean scaleH = false;
     TabPane tabs = new TabPane();
     Tab[] tab = {
             new Tab("NPC"),
@@ -71,41 +74,60 @@ public class DBInterface {
         mainMenu.getTransforms().add(new Scale(ui.height/ui.height, ui.width/ui.width, 0, 0));
         ui.windowScene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                Scale scale = new Scale((double)newSceneWidth/ui.width, ui.window.getHeight()/ui.height, 0, 0);
+                Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
                 mainMenu.getTransforms().setAll(scale);
             }
         });
         ui.windowScene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                Scale scale = new Scale(ui.window.getWidth()/ui.width, (double)newSceneHeight/ui.height, 0, 0);
+                Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
+                mainMenu.getTransforms().setAll(scale);
+            }
+        });
+        ui.window.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
                 mainMenu.getTransforms().setAll(scale);
             }
         });
         //Create Window
         ui.window.setScene(ui.windowScene);
         ui.window.getScene().getStylesheets().add("css/main.css");
-        ui.window.show();
+        Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
+        mainMenu.getTransforms().setAll(scale);
     }
 
     private void creature_template(String id){
         subMenu[0] = new StackPane();
         subMenu[0].setAlignment(Pos.TOP_LEFT);
-        tab[0].setContent(subMenu[0]);
+        subMenu[0].setPrefSize(1920, 1080);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(subMenu[0]);
+        tab[0].setContent(scrollPane);
         //Text box
         String name = "";
+        String dungeonDiff[] = new String[3];
         String statement = "SELECT * FROM creature_template WHERE entry = " + id;
         ResultSet rows = ui.conn.processQuery(statement);
         try {
             while (rows.next()) {
                 name = rows.getString("name");
+                for(int i = 0; i < 3; i++){
+                    dungeonDiff[i] = Integer.toString(rows.getInt("Difficulty_Entry_" + (i+1)));
+                }
             }
         } catch(SQLException ex){
             ex.printStackTrace();
         }
-        DBEntry entry = new DBEntry(subMenu, "NPC ID: ", id, 100, 10);
-        DBEntry npcName = new DBEntry(subMenu, "NPC Name: ", name, 100, 50);
+        DBEntry entry = new DBEntry(subMenu[0], "NPC Entry ID: ", id, 100, 10);
+        DBEntry npcName = new DBEntry(subMenu[0], "NPC Name: ", name, 100, 900);
+        DBEntry[] dungDiff = new DBEntry[3];
+        for(int i = 0; i < 3; i++){
+            dungDiff[i] = new DBEntry(subMenu[0], "Dungeon Difficulty Entry: " + (i+1), dungeonDiff[i], 100, 200+(i*100));
+        }
         //updateButton
-        Button update = new Button("Update");
+        Button update = new Button("Search");
         update.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event)
@@ -113,11 +135,11 @@ public class DBInterface {
                creature_template(entry.getID());
             }
         });
-        update.setId("MenuButton");
-        update.setPrefSize(200, 30);
+        update.setId("SubMenuButton");
+        update.setPrefSize(100, 30);
         update.setTextAlignment(TextAlignment.CENTER);
-        update.setTranslateY(10);
-        update.setTranslateX(400);
+        update.setTranslateY(8);
+        update.setTranslateX(350);
         subMenu[0].getChildren().add(update);
     }
 

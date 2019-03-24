@@ -43,6 +43,29 @@
         linear-gradient(#b26607, #512d00),
         linear-gradient(#b26607, #512d00);
 }
+#SubMenuButton {
+    -fx-background-color:
+        #000000,
+        linear-gradient(#f99a00, #703f01),
+        linear-gradient(#f99a00, #703f01),
+        linear-gradient(#f99a00, #703f01);
+    -fx-background-insets: 2, 2, 2, 2;
+    -fx-border-color:black;
+    -fx-border-width: 3;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-position: center;
+}
+#SubMenuButton:hover{
+    -fx-background-color:
+        #000000,
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00);
+}
 #label {
     -fx-background-color:
         #000000,
@@ -108,4 +131,10 @@
 .tab-pane:focused{
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.scroll-pane {
+   -fx-background-color: transparent;
 }
