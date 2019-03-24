@@ -18,8 +18,8 @@ public class DBInterface {
     UserInterface ui;
     TabPane tabs = new TabPane();
     Tab[] tab = {
-            new Tab("Creature_Template"),
-            new Tab("Other")
+            new Tab("NPC"),
+            new Tab("Quest")
     };
     StackPane mainMenu = new StackPane();
     StackPane[] subMenu = new StackPane[tab.length];
@@ -64,7 +64,7 @@ public class DBInterface {
         ui.windowScene = new Scene(mainMenu);
         //Background
         mainMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
-        Image backImg = new Image("CSS/Assets/WoWPortal.jpg");
+        Image backImg = new Image("CSS/Assets/quest.jpg");
         ImagePattern pattern = new ImagePattern(backImg);
         ui.windowScene.setFill(pattern);
         //Scale to window handler
@@ -102,14 +102,7 @@ public class DBInterface {
         } catch(SQLException ex){
             ex.printStackTrace();
         }
-        Label npcName = new Label("NPC Name: ");
-        TextField entry = new TextField(name);
-        npcName.setId("label");
-        entry.setTranslateY(100);
-        npcName.setTranslateY(100);
-        entry.setTranslateX(100);
-        entry.setMaxWidth(entry.getText().length()*10);
-        subMenu[0].getChildren().addAll(entry, npcName);
+        DBEntry npcName = new DBEntry(subMenu, "NPC Name: ", name, 100, 10);
     }
 
 }
