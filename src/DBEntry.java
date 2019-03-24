@@ -5,17 +5,21 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 
 public class DBEntry {
-    TextField entry;
-    public DBEntry(StackPane[] root, String label, String Entry, int x, int y){
+    TextField text;
+    public DBEntry(StackPane[] root, String label, String entry, int x, int y){
         Label npcName = new Label(label);
-        entry = new TextField(Entry);
+        text = new TextField(entry);
         npcName.setPrefSize(100, 30);
         npcName.setId("label");
-        entry.setTranslateY(y);
+        text.setTranslateY(y);
         npcName.setTranslateY(y);
-        entry.setTranslateX(x+10);
-        npcName.setTranslateX(entry.getTranslateX()-npcName.getPrefWidth());
-        entry.setMaxWidth(entry.getText().length()*10);
-        root[0].getChildren().addAll(entry, npcName);
+        text.setTranslateX(x+10);
+        npcName.setTranslateX(text.getTranslateX()-npcName.getPrefWidth());
+        text.setMaxWidth(200);
+        root[0].getChildren().addAll(text, npcName);
+    }
+
+    public String getID() {
+        return text.getCharacters().toString();
     }
 }

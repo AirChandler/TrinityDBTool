@@ -32,7 +32,7 @@ public class DBInterface {
         //Tab panels
         tabs.setMinSize(ui.width, ui.height-tabs.getTranslateY());
         tabs.setMaxSize(ui.width, ui.height-tabs.getTranslateY());
-        creature_template();
+        creature_template("197");
         tabs.getTabs().addAll(tab);
         tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         //BackButton
@@ -87,13 +87,13 @@ public class DBInterface {
         ui.window.show();
     }
 
-    private void creature_template(){
+    private void creature_template(String id){
         subMenu[0] = new StackPane();
         subMenu[0].setAlignment(Pos.TOP_LEFT);
         tab[0].setContent(subMenu[0]);
         //Text box
         String name = "";
-        String statement = "SELECT * FROM creature_template WHERE entry = 197";
+        String statement = "SELECT * FROM creature_template WHERE entry = " + id;
         ResultSet rows = ui.conn.processQuery(statement);
         try {
             while (rows.next()) {
@@ -102,7 +102,23 @@ public class DBInterface {
         } catch(SQLException ex){
             ex.printStackTrace();
         }
-        DBEntry npcName = new DBEntry(subMenu, "NPC Name: ", name, 100, 10);
+        DBEntry entry = new DBEntry(subMenu, "NPC ID: ", id, 100, 10);
+        DBEntry npcName = new DBEntry(subMenu, "NPC Name: ", name, 100, 50);
+        //updateButton
+        Button update = new Button("Update");
+        update.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event)
+            {
+               creature_template(entry.getID());
+            }
+        });
+        update.setId("MenuButton");
+        update.setPrefSize(200, 30);
+        update.setTextAlignment(TextAlignment.CENTER);
+        update.setTranslateY(10);
+        update.setTranslateX(400);
+        subMenu[0].getChildren().add(update);
     }
 
 }
