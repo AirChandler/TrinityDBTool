@@ -9,12 +9,12 @@ public class DBEntry {
     public DBEntry(StackPane root, String label, String entry, int x, int y){
         Label npcName = new Label(label);
         text = new TextField(entry);
-        npcName.setPrefSize(100, 30);
+        npcName.setPrefSize(npcName.getText().length()*9, 30);
         npcName.setId("label");
         text.setTranslateY(y);
         npcName.setTranslateY(y);
-        text.setTranslateX(x+10);
-        npcName.setTranslateX(text.getTranslateX()-npcName.getPrefWidth());
+        text.setTranslateX(x+npcName.getPrefWidth());
+        npcName.setTranslateX(x);
         text.setMaxWidth(200);
         root.getChildren().addAll(text, npcName);
     }
