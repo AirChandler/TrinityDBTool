@@ -24,7 +24,7 @@ public class DBInterface {
     TabPane tabs = new TabPane();
     Tab[] tab = {
             new Tab("Creature Template"),
-            new Tab("Quest")
+            new Tab("Creature")
     };
     StackPane mainMenu = new StackPane();
     StackPane[] subMenu = new StackPane[tab.length];
@@ -37,9 +37,23 @@ public class DBInterface {
         //Tab panels
         tabs.setMinSize(ui.width, ui.height-tabs.getTranslateY());
         tabs.setMaxSize(ui.width, ui.height-tabs.getTranslateY());
-        creature_template("197");
         tabs.getTabs().addAll(tab);
+        //Default tab
+        creature_template("197");
         tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        tabs.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+                        switch(t1.getText()){
+                            case "Creature":
+                                creature("168289");
+                            case "Creature Template":
+                                creature_template("197");
+                        }
+                    }
+                }
+        );
         //BackButton
         Button back = new Button("◄ Main Menu");
         back.setOnAction(new EventHandler<ActionEvent>() {
@@ -108,6 +122,16 @@ public class DBInterface {
         scrollPane.setContent(subMenu[0]);
         tab[0].setContent(scrollPane);
         CreatureTemplate template = new CreatureTemplate(subMenu[0], id, ui.conn);
+    }
+
+    private void creature(String guid){
+        subMenu[1] = new StackPane();
+        subMenu[1].setAlignment(Pos.TOP_LEFT);
+        subMenu[1].setPrefHeight(1500);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(subMenu[1]);
+        tab[1].setContent(scrollPane);
+        Creature template = new Creature(subMenu[1], guid, ui.conn);
     }
 
 }
