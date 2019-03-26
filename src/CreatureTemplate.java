@@ -17,252 +17,177 @@ public class CreatureTemplate {
     StackPane pane;
     DBInitialise conn;
     String id;
+    //Text Entries
+    DBEntry entry;
+    DBEntry npcName;
+    DBEntry sName;
+    DBEntry iName;
+    DBEntry[] dungDiff = new DBEntry[3];
+    DBEntry[] killCredit = new DBEntry[2];
+    DBEntry[] modelIds = new DBEntry[4];
+    DBEntry gossip;
+    DBEntry minLvl;
+    DBEntry maxLvl;
+    DBEntry hpTab;
+    DBEntry hpTabUnk;
+    DBEntry facA;
+    DBEntry facH;
+    DBEntry npcF;
+    DBEntry speedW;
+    DBEntry speedR;
+    DBEntry npcS;
+    DBEntry npcRank;
+    DBEntry minDamage;
+    DBEntry maxDamage;
+    DBEntry dmgSchoolType;
+    DBEntry attackPower;
+    DBEntry minRDamage;
+    DBEntry maxRDamage;
+    DBEntry rangeAttckPower;
+    DBEntry dmgMultiplier;
+    DBEntry baseAttTime;
+    DBEntry rangeAttTime;
+    DBEntry uClass;
+    DBEntry uFlags1;
+    DBEntry uFlags2;
+    DBEntry dynFlags;
+    DBEntry cFamily;
+    DBEntry trainerT;
+    DBEntry trainerC;
+    DBEntry trainerR;
+    DBEntry npcRType;
+    DBEntry npcRTypeFlag;
+    DBEntry npcRTypeFlag2;
+    DBEntry lootEntry;
+    DBEntry ppEntry;
+    DBEntry skinEntry;
+    DBEntry[] resistanceEntry = new DBEntry[6];
+    DBEntry[] spellId = new DBEntry[8];
+    DBEntry petSpellId;
+    DBEntry vehId;
+    DBEntry minG;
+    DBEntry maxG;
+    DBEntry ai;
+    DBEntry moveType;
+    DBEntry inhabType;
+    DBEntry hovHeight;
+    DBEntry hpMod;
+    DBEntry manMod;
+    DBEntry manModEx;
+    DBEntry armMod;
+    DBEntry raceLead;
+    DBEntry qItem[] = new DBEntry[6];
+    DBEntry moveId;
+    DBEntry regenHP;
+    DBEntry mechImmune;
+    DBEntry flagsEx;
+    DBEntry script;
+    DBEntry wdbVersion;
 
-    public CreatureTemplate(StackPane p, String i, DBInitialise c){
+    public CreatureTemplate(StackPane p, String entry, DBInitialise c){
         pane = p;
         conn = c;
-        id = i;
+        id = entry;
         construct();
     }
 
     private void construct(){
-        //Text box
-        String name = "";
-        String subName = "";
-        String iconName = "";
-        String dungeonDiff[] = new String[3];
-        String killCr[] = new String[2];
-        String modelId[] = new String[4];
-        String gossipMenuId = "";
-        String minLevel = "";
-        String maxLevel = "";
-        String exp = "";
-        String expUnk = "";
-        String factionA = "";
-        String factionH = "";
-        String npcFlag = "";
-        String walkSpeed = "";
-        String runSpeed = "";
-        String scale = "";
-        String rank = "";
-        String minDmg = "";
-        String maxDmg = "";
-        String minRangeDmg = "";
-        String maxRangeDmg = "";
-        String rangeAttackPower = "";
-        String dmgSchool = "";
-        String attPower = "";
-        String dmgMult = "";
-        String baseAttackTime = "";
-        String rangeAttackTime = "";
-        String unitClass = "";
-        String[] unitFlags = new String[2];
-        String dynamicFlags = "";
-        String creatureFamily = "";
-        String trainerType = "";
-        String trainerClass = "";
-        String trainerRace = "";
-        String npcType = "";
-        String npcTypeFlag[] = new String[2];
-        String lootId = "";
-        String pickpocketLootId = "";
-        String skinLootId = "";
-        String resistanceVal[] = new String[6];
-        String spell[] = new String[8];
-        String petSpellDataId = "";
-        String vehicleId = "";
-        String minGold = "";
-        String maxGold = "";
-        String aiName = "";
-        String movementType = "";
-        String inhabitType = "";
-        String hoverHeight = "";
-        String healthMod = "";
-        String manaMod = "";
-        String manaModEx = "";
-        String armorMod = "";
-        String racialLeader = "";
-        String questItem[] = new String[6];
-        String movementId = "";
-        String regenHealth = "";
-        String mechanicImmuneMask = "";
-        String flagsExtra = "";
-        String scriptName = "";
-        String wdbVerified = "";
+        //Text Entries
+        entry = new DBEntry(pane, "NPC Entry ID: ", id, 10, 10);
         String statement = "SELECT * FROM creature_template WHERE entry = " + id;
         ResultSet rows = conn.processQuery(statement);
         try {
             while (rows.next()) {
-                name = rows.getString("name");
-                for(int i = 0; i < 3; i++){
-                    dungeonDiff[i] = Integer.toString(rows.getInt("Difficulty_Entry_" + (i+1)));
+                npcName = new DBEntry(pane, "NPC Name: ", rows.getString("name"), 10, 90);
+                for(int i = 0; i < dungDiff.length; i++){
+                    dungDiff[i] = new DBEntry(pane, "Dungeon Difficulty Entry " + (i+1)+": ",
+                            Integer.toString(rows.getInt("Difficulty_Entry_" + (i+1))), 10, 200+(i*30));
                 }
-                for(int i = 0; i < 2; i++){
-                    killCr[i] = Integer.toString(rows.getInt("KillCredit"+(i+1)));
+                for(int i = 0; i < killCredit.length; i++){
+                    killCredit[i] = new DBEntry(pane, "Quest Kill Credit Entry " + (i+1) +": ",
+                            Integer.toString(rows.getInt("KillCredit"+(i+1))), 10, 300+(i*30));
                 }
-                for(int i = 0; i < 4; i++){
-                    modelId[i] = Integer.toString(rows.getInt("modelid"+(i+1)));
+                for(int i = 0; i < modelIds.length; i++){
+                    modelIds[i] = new DBEntry(pane, "Model id " + (i+1) +": ",
+                            Integer.toString(rows.getInt("modelid"+(i+1))), 10, 400+(i*30));
                 }
-                subName = rows.getString("subname");
-                iconName = rows.getString("IconName");
-                gossipMenuId = Integer.toString(rows.getInt("gossip_menu_id"));
-                minLevel = Integer.toString(rows.getInt("minlevel"));
-                maxLevel = Integer.toString(rows.getInt("maxlevel"));
-                exp = Integer.toString(rows.getInt("exp"));
-                expUnk = Integer.toString(rows.getInt("exp_unk"));
-                factionA = Integer.toString(rows.getInt("faction_A"));
-                factionH = Integer.toString(rows.getInt("faction_H"));
-                npcFlag = Integer.toString(rows.getInt("npcflag"));
-                walkSpeed = Float.toString(rows.getFloat("speed_walk"));
-                runSpeed = Float.toString(rows.getFloat("speed_run"));
-                scale = Float.toString(rows.getFloat("scale"));
-                rank = Integer.toString(rows.getInt("rank"));
-                minDmg = Float.toString(rows.getFloat("mindmg"));
-                maxDmg = Float.toString(rows.getFloat("maxdmg"));
-                minRangeDmg = Float.toString(rows.getFloat("minrangedmg"));
-                maxRangeDmg = Float.toString(rows.getFloat("maxrangedmg"));
-                dmgSchool = Integer.toString(rows.getInt("dmgschool"));
-                attPower = Integer.toString(rows.getInt("attackpower"));
-                dmgMult = Float.toString(rows.getFloat("dmg_multiplier"));
-                baseAttackTime = Integer.toString(rows.getInt("baseattacktime"));
-                rangeAttackTime = Integer.toString(rows.getInt("rangeattacktime"));
-                unitClass = Integer.toString(rows.getInt("unit_class"));
-                unitFlags[0] = Integer.toString(rows.getInt("unit_flags"));
-                unitFlags[1] = Integer.toString(rows.getInt("unit_flags2"));
-                dynamicFlags = Integer.toString(rows.getInt("dynamicflags"));
-                creatureFamily = Integer.toString(rows.getInt("family"));
-                trainerType = Integer.toString(rows.getInt("trainer_type"));
-                trainerClass = Integer.toString(rows.getInt("trainer_class"));
-                trainerRace = Integer.toString(rows.getInt("trainer_race"));
-                rangeAttackPower = Integer.toString(rows.getInt("rangedattackpower"));
-                npcType = Integer.toString(rows.getInt("type"));
-                npcTypeFlag[0] = Integer.toString(rows.getInt("type_flags"));
-                npcTypeFlag[1] = Integer.toString(rows.getInt("type_flags2"));
-                lootId = Integer.toString(rows.getInt("lootid"));
-                pickpocketLootId = Integer.toString(rows.getInt("pickpocketloot"));
-                skinLootId = Integer.toString(rows.getInt("skinloot"));
-                for(int i = 0; i < resistanceVal.length; i++){
-                    resistanceVal[i] = Integer.toString(rows.getInt("resistance"+(i+1)));
+                sName = new DBEntry(pane, "Sub Name (<> prefix): ", rows.getString("subname"), 10, 120);
+                iName = new DBEntry(pane, "(Cursor) Icon Type: ", rows.getString("IconName"), 10, 150);
+                gossip = new DBEntry(pane, "Gossip Menu id: ", Integer.toString(rows.getInt("gossip_menu_id")), 500, 90);
+                minLvl = new DBEntry(pane, "Min Level: ", Integer.toString(rows.getInt("minlevel")), 500, 140);
+                maxLvl = new DBEntry(pane, "Max Level: ", Integer.toString(rows.getInt("maxlevel")), 500, 170);
+                hpTab = new DBEntry(pane, "HP Table (exp): ", Integer.toString(rows.getInt("exp")), 500, 240);
+                hpTabUnk = new DBEntry(pane, "HP Table (exp_unk): ", Integer.toString(rows.getInt("exp_unk")), 500, 270);
+                facA = new DBEntry(pane, "Faction Alliance: ", Integer.toString(rows.getInt("faction_A")), 500, 330);
+                facH = new DBEntry(pane, "Faction Horde: ", Integer.toString(rows.getInt("faction_H")), 500, 360);
+                npcF = new DBEntry(pane, "NPC Type Flag: ", Integer.toString(rows.getInt("npcflag")), 500, 420);
+                speedW = new DBEntry(pane, "Walk Speed: ", Float.toString(rows.getFloat("speed_walk")), 900, 360);
+                speedR = new DBEntry(pane, "Run Speed: ", Float.toString(rows.getFloat("speed_run")), 900, 390);
+                npcS = new DBEntry(pane, "NPC Scale Size: ", Float.toString(rows.getFloat("scale")), 500, 480);
+                npcRank = new DBEntry(pane, "NPC Power Rank: ", Integer.toString(rows.getInt("rank")), 900, 450);
+                minDamage = new DBEntry(pane, "Min Damage: ", Float.toString(rows.getFloat("mindmg")), 900, 510);
+                maxDamage = new DBEntry(pane, "Max Damage: ", Float.toString(rows.getFloat("maxdmg")), 900, 540);
+                dmgSchoolType = new DBEntry(pane, "NPC Damage School Type: ", Integer.toString(rows.getInt("dmgschool")), 10, 540);
+                attackPower = new DBEntry(pane, "Attack Power: ", Integer.toString(rows.getInt("attackpower")), 900, 570);
+                minRDamage = new DBEntry(pane, "Min Range Damage: ", Float.toString(rows.getFloat("minrangedmg")), 900, 600);
+                maxRDamage = new DBEntry(pane, "Max Range Damage: ", Float.toString(rows.getFloat("maxrangedmg")), 900, 630);
+                rangeAttckPower = new DBEntry(pane, "Range Attack Power: ", Integer.toString(rows.getInt("rangedattackpower")), 900, 660);
+                dmgMultiplier = new DBEntry(pane, "NPC Damage Multiplier: ", Float.toString(rows.getFloat("dmg_multiplier")), 10, 600);
+                baseAttTime = new DBEntry(pane, "Base Attack Time: ", Integer.toString(rows.getInt("baseattacktime")), 500, 540);
+                rangeAttTime = new DBEntry(pane, "Range Attack Time: ", Integer.toString(rows.getInt("rangeattacktime")), 500, 570);
+                uClass = new DBEntry(pane, "Unit Class: ", Integer.toString(rows.getInt("unit_class")), 500, 630);
+                uFlags1 = new DBEntry(pane, "Unit Flags: ", Integer.toString(rows.getInt("unit_flags")), 900, 720);
+                uFlags2 = new DBEntry(pane, "Unit Flags 2: ", Integer.toString(rows.getInt("unit_flags2")), 900, 750);
+                dynFlags = new DBEntry(pane, "Dynamic Flags: ", Integer.toString(rows.getInt("dynamicflags")), 900, 780);
+                cFamily = new DBEntry(pane, "Creature Family: ", Integer.toString(rows.getInt("family")), 10, 660);
+                trainerT = new DBEntry(pane, "Trainer Type: ", Integer.toString(rows.getInt("trainer_type")), 10, 720);
+                trainerC = new DBEntry(pane, "Trainer Class: ", Integer.toString(rows.getInt("trainer_class")), 10, 750);
+                trainerR = new DBEntry(pane, "Trainer Race: ", Integer.toString(rows.getInt("trainer_race")), 10, 780);
+                npcRType = new DBEntry(pane, "NPC Race Type: ", Integer.toString(rows.getInt("type")), 500, 690);
+                npcRTypeFlag = new DBEntry(pane, "NPC Race Type Flags 1: ", Integer.toString(rows.getInt("type_flags")), 500, 720);
+                npcRTypeFlag2 = new DBEntry(pane, "NPC Race Type Flags 2: ", Integer.toString(rows.getInt("type_flags2")), 500, 750);
+                lootEntry = new DBEntry(pane, "Loot id: ", Integer.toString(rows.getInt("lootid")), 500, 810);
+                ppEntry = new DBEntry(pane, "Pickpocket loot id: ", Integer.toString(rows.getInt("pickpocketloot")), 500, 840);
+                skinEntry = new DBEntry(pane, "Skinning loot id: ", Integer.toString(rows.getInt("skinloot")), 500, 870);
+                for(int i = 0; i < resistanceEntry.length; i++){
+                    resistanceEntry[i] = new DBEntry(pane, "Resistance "+(i+1)+" Value: ", Integer.toString(rows.getInt("resistance"+(i+1))), 10, 840+(i*30));
                 }
-                for(int i = 0; i < spell.length; i++){
-                    spell[i] = Integer.toString(rows.getInt("spell"+(i+1)));
+                for(int i = 0; i < spellId.length; i++){
+                    spellId[i] = new DBEntry(pane, "Spell "+(i+1)+" id: ", Integer.toString(rows.getInt("spell"+(i+1))), 900, 840+(i*30));
                 }
-                petSpellDataId = Integer.toString(rows.getInt("PetSpellDataId"));
-                vehicleId = Integer.toString(rows.getInt("VehicleId"));
-                minGold = Integer.toString(rows.getInt("mingold"));
-                maxGold = Integer.toString(rows.getInt("maxgold"));
-                aiName = rows.getString("AIName");
-                movementType = Integer.toString(rows.getInt("MovementType"));
-                inhabitType = Integer.toString(rows.getInt("InhabitType"));
-                hoverHeight = Float.toString(rows.getFloat("HoverHeight"));
-                healthMod = Float.toString(rows.getFloat("Health_mod"));
-                manaMod = Float.toString(rows.getFloat("Mana_mod"));
-                manaModEx = Float.toString(rows.getFloat("Mana_mod_extra"));
-                armorMod = Float.toString(rows.getFloat("Armor_mod"));
-                racialLeader = Integer.toString(rows.getInt("RacialLeader"));
-                for(int i = 0; i < questItem.length; i++){
-                    questItem[i] = Integer.toString(rows.getInt("questItem"+(i+1)));
+                petSpellId = new DBEntry(pane, "Pet Spell Data id: ", Integer.toString(rows.getInt("PetSpellDataId")), 500, 930);
+                vehId = new DBEntry(pane, "Vehicle id: ", Integer.toString(rows.getInt("VehicleId")), 500, 990);
+                minG = new DBEntry(pane, "Min Gold: ", Integer.toString(rows.getInt("mingold")), 500, 1050);
+                maxG = new DBEntry(pane, "Max Gold: ", Integer.toString(rows.getInt("maxgold")), 500, 1080);
+                ai = new DBEntry(pane, "AI Name: ", rows.getString("AIName"), 10, 1050);
+                moveType = new DBEntry(pane, "Movement Type: ", Integer.toString(rows.getInt("MovementType")), 10, 1110);
+                inhabType = new DBEntry(pane, "Inhabit Type: ", Integer.toString(rows.getInt("InhabitType")), 10, 1140);
+                hovHeight = new DBEntry(pane, "Hover Height: ", Float.toString(rows.getFloat("HoverHeight")), 500, 1140);
+                hpMod = new DBEntry(pane, "Health mod: ", Float.toString(rows.getFloat("Health_mod")), 900, 1110);
+                manMod = new DBEntry(pane, "Mana mod: ", Float.toString(rows.getFloat("Mana_mod")), 900, 1140);
+                manModEx = new DBEntry(pane, "Mana mod extra: ", Float.toString(rows.getFloat("Mana_mod_extra")), 900, 1170);
+                armMod = new DBEntry(pane, "Armor mod: ", Float.toString(rows.getFloat("Armor_mod")), 900, 1200);
+                raceLead = new DBEntry(pane, "Racial Leader: ", Integer.toString(rows.getInt("RacialLeader")), 10, 1200);
+                for(int i = 0; i < qItem.length; i++){
+                    qItem[i] = new DBEntry(pane, "Quest Item "+(i+1)+": ", Integer.toString(rows.getInt("questItem"+(i+1))), 500, 1200+(i*30));
                 }
-                movementId = Integer.toString(rows.getInt("movementId"));
-                regenHealth = Integer.toString(rows.getInt("RegenHealth"));
-                mechanicImmuneMask = Integer.toString(rows.getInt("mechanic_immune_mask"));
-                flagsExtra = Integer.toString(rows.getInt("flags_extra"));
-                scriptName = rows.getString("ScriptName");
-                wdbVerified = Integer.toString(rows.getInt("WDBVerified"));
+                moveId = new DBEntry(pane, "Movement id: ", Integer.toString(rows.getInt("movementId")), 10, 1260);
+                regenHP = new DBEntry(pane, "Regen HP: ", Integer.toString(rows.getInt("RegenHealth")), 10, 1320);
+                mechImmune = new DBEntry(pane, "Mechanic Immune Mask: ", Integer.toString(rows.getInt("mechanic_immune_mask")), 900, 1260);
+                flagsEx = new DBEntry(pane, "Flags Extra: ", Integer.toString(rows.getInt("flags_extra")), 900, 1320);
+                script = new DBEntry(pane, "Script Name: ", rows.getString("ScriptName"), 10, 1380);
+                wdbVersion = new DBEntry(pane, "WDB Verified Version: ", Integer.toString(rows.getInt("WDBVerified")), 900, 1380);
             }
         } catch(SQLException ex){
             ex.printStackTrace();
         }
-        DBEntry entry = new DBEntry(pane, "NPC Entry ID: ", id, 10, 10);
-        DBEntry npcName = new DBEntry(pane, "NPC Name: ", name, 10, 90);
-        DBEntry sName = new DBEntry(pane, "Sub Name (<> prefix): ", subName, 10, 120);
-        DBEntry iName = new DBEntry(pane, "(Cursor) Icon Type: ", iconName, 10, 150);
-        DBEntry[] dungDiff = new DBEntry[3];
-        for(int i = 0; i < 3; i++){
-            dungDiff[i] = new DBEntry(pane, "Dungeon Difficulty Entry " + (i+1)+": ", dungeonDiff[i], 10, 200+(i*30));
-        }
-        DBEntry[] killCredit = new DBEntry[2];
-        for(int i = 0; i < 2; i++){
-            killCredit[i] = new DBEntry(pane, "Quest Kill Credit Entry " + (i+1) +": ", killCr[i], 10, 300+(i*30));
-        }
-        DBEntry[] modelIds = new DBEntry[4];
-        for(int i = 0; i < 4; i++){
-            modelIds[i] = new DBEntry(pane, "Model id " + (i+1) +": ", modelId[i], 10, 400+(i*30));
-        }
-        DBEntry gossip = new DBEntry(pane, "Gossip Menu id: ", gossipMenuId, 500, 90);
-        DBEntry minLvl = new DBEntry(pane, "Min Level: ", minLevel, 500, 140);
-        DBEntry maxLvl = new DBEntry(pane, "Max Level: ", maxLevel, 500, 170);
-        DBEntry hpTab = new DBEntry(pane, "HP Table (exp): ", exp, 500, 240);
-        DBEntry hpTabUnk = new DBEntry(pane, "HP Table (exp_unk): ", expUnk, 500, 270);
-        DBEntry facA = new DBEntry(pane, "Faction Alliance: ", factionA, 500, 330);
-        DBEntry facH = new DBEntry(pane, "Faction Horde: ", factionH, 500, 360);
-        DBEntry npcF = new DBEntry(pane, "NPC Type Flag: ", npcFlag, 500, 420);
-        DBEntry speedW = new DBEntry(pane, "Walk Speed: ", walkSpeed, 900, 360);
-        DBEntry speedR = new DBEntry(pane, "Run Speed: ", runSpeed, 900, 390);
-        DBEntry npcS = new DBEntry(pane, "NPC Scale Size: ", scale, 500, 480);
-        DBEntry npcRank = new DBEntry(pane, "NPC Power Rank: ", rank, 900, 450);
-        DBEntry minDamage = new DBEntry(pane, "Min Damage: ", minDmg, 900, 510);
-        DBEntry maxDamage = new DBEntry(pane, "Max Damage: ", minDmg, 900, 540);
-        DBEntry dmgSchoolType = new DBEntry(pane, "NPC Damage School Type: ", dmgSchool, 10, 540);
-        DBEntry attackPower = new DBEntry(pane, "Attack Power: ", attPower, 900, 570);
-        DBEntry minRDamage = new DBEntry(pane, "Min Range Damage: ", minRangeDmg, 900, 600);
-        DBEntry maxRDamage = new DBEntry(pane, "Max Range Damage: ", maxRangeDmg, 900, 630);
-        DBEntry rangeAttckPower = new DBEntry(pane, "Range Attack Power: ", rangeAttackPower, 900, 660);
-        DBEntry dmgMultiplier = new DBEntry(pane, "NPC Damage Multiplier: ", dmgMult, 10, 600);
-        DBEntry baseAttTime = new DBEntry(pane, "Base Attack Time: ", baseAttackTime, 500, 540);
-        DBEntry rangeAttTime = new DBEntry(pane, "Range Attack Time: ", rangeAttackTime, 500, 570);
-        DBEntry uClass = new DBEntry(pane, "Unit Class: ", unitClass, 500, 630);
-        DBEntry uFlags1 = new DBEntry(pane, "Unit Flags: ", unitFlags[0], 900, 720);
-        DBEntry uFlags2 = new DBEntry(pane, "Unit Flags 2: ", unitFlags[1], 900, 750);
-        DBEntry dynFlags = new DBEntry(pane, "Dynamic Flags: ", dynamicFlags, 900, 780);
-        DBEntry cFamily = new DBEntry(pane, "Creature Family: ", creatureFamily, 10, 660);
-        DBEntry trainerT = new DBEntry(pane, "Trainer Type: ", trainerType, 10, 720);
-        DBEntry trainerC = new DBEntry(pane, "Trainer Class: ", trainerClass, 10, 750);
-        DBEntry trainerR = new DBEntry(pane, "Trainer Race: ", trainerRace, 10, 780);
-        DBEntry npcRType = new DBEntry(pane, "NPC Race Type: ", npcType, 500, 690);
-        DBEntry npcRTypeFlag = new DBEntry(pane, "NPC Race Type Flags 1: ", npcTypeFlag[0], 500, 720);
-        DBEntry npcRTypeFlag2 = new DBEntry(pane, "NPC Race Type Flags 2: ", npcTypeFlag[1], 500, 750);
-        DBEntry lootEntry = new DBEntry(pane, "Loot id: ", lootId, 500, 810);
-        DBEntry ppEntry = new DBEntry(pane, "Pickpocket loot id: ", pickpocketLootId, 500, 840);
-        DBEntry skinEntry = new DBEntry(pane, "Skinning loot id: ", skinLootId, 500, 870);
-        DBEntry[] resistanceEntry = new DBEntry[resistanceVal.length];
-        for(int i = 0; i < resistanceEntry.length; i++){
-            resistanceEntry[i] = new DBEntry(pane, "Resistance "+(i+1)+" Value: ", resistanceVal[i], 10, 840+(i*30));
-        }
-        DBEntry[] spellId = new DBEntry[spell.length];
-        for(int i = 0; i < spellId.length; i++){
-            spellId[i] = new DBEntry(pane, "Spell "+(i+1)+" id: ", spell[i], 900, 840+(i*30));
-        }
-        DBEntry petSpellId = new DBEntry(pane, "Pet Spell Data id: ", petSpellDataId, 500, 930);
-        DBEntry vehId = new DBEntry(pane, "Vehicle id: ", vehicleId, 500, 990);
-        DBEntry minG = new DBEntry(pane, "Min Gold: ", minGold, 500, 1050);
-        DBEntry maxG = new DBEntry(pane, "Max Gold: ", maxGold, 500, 1080);
-        DBEntry ai = new DBEntry(pane, "AI Name: ", aiName, 10, 1050);
-        DBEntry moveType = new DBEntry(pane, "Movement Type: ", movementType, 10, 1110);
-        DBEntry inhabType = new DBEntry(pane, "Inhabit Type: ", inhabitType, 10, 1140);
-        DBEntry hovHeight = new DBEntry(pane, "Hover Height: ", hoverHeight, 500, 1140);
-        DBEntry hpMod = new DBEntry(pane, "Health mod: ", healthMod, 900, 1110);
-        DBEntry manMod = new DBEntry(pane, "Mana mod: ", manaMod, 900, 1140);
-        DBEntry manModEx = new DBEntry(pane, "Mana mod extra: ", manaModEx, 900, 1170);
-        DBEntry armMod = new DBEntry(pane, "Armor mod: ", armorMod, 900, 1200);
-        DBEntry raceLead = new DBEntry(pane, "Racial Leader: ", racialLeader, 10, 1200);
-        DBEntry qItem[] = new DBEntry[questItem.length];
-        for(int i = 0; i < qItem.length; i++){
-            qItem[i] = new DBEntry(pane, "Quest Item "+(i+1)+": ", questItem[i], 500, 1200+(i*30));
-        }
-        DBEntry moveId = new DBEntry(pane, "Movement id: ", movementId, 10, 1260);
-        DBEntry regenHP = new DBEntry(pane, "Regen HP: ", regenHealth, 10, 1320);
-        DBEntry mechImmune = new DBEntry(pane, "Mechanic Immune Mask: ", mechanicImmuneMask, 900, 1260);
-        DBEntry flagsEx = new DBEntry(pane, "Flags Extra: ", flagsExtra, 900, 1320);
-        DBEntry script = new DBEntry(pane, "Script Name: ", scriptName, 10, 1380);
-        DBEntry wdbVersion = new DBEntry(pane, "WDB Verified Version: ", wdbVerified, 900, 1380);
         //NPC Model
         Rectangle npcModel = new Rectangle();
         npcModel.setWidth(300);
         npcModel.setHeight(300);
         try {
-            String subDir = Character.toString(modelId[0].charAt(0));
-            String imgUrl = "http://mop-static.tauri.hu/npc/" + subDir + "/creature-display-" + modelId[0] + ".jpg";
+            String subDir = Character.toString(modelIds[0].getVal().charAt(0));
+            String imgUrl = "http://mop-static.tauri.hu/npc/" + subDir + "/creature-display-" + modelIds[0].getVal() + ".jpg";
             Image backImg = new Image(imgUrl);
             ImagePattern pattern = new ImagePattern(backImg);
             npcModel.setFill(pattern);
