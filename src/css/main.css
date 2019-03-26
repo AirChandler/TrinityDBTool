@@ -69,9 +69,9 @@
 #label {
     -fx-background-color:
         #000000,
-        linear-gradient(#f99a00, #703f01),
-        linear-gradient(#f99a00, #703f01),
-        linear-gradient(#f99a00, #703f01);
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00),
+        linear-gradient(#b26607, #512d00);
     -fx-background-insets: 1, 1, 1, 1;
     -fx-border-color:black;
     -fx-border-width: 1;
@@ -80,6 +80,15 @@
     -fx-font-size: 14px;
 	-fx-font-weight: bold;
 	-fx-position: center;
+}
+#textField {
+    -fx-background-color:
+    #000000,
+    linear-gradient(#f99a00, #703f01),
+    linear-gradient(#f99a00, #703f01),
+    linear-gradient(#f99a00, #703f01);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
 }
 #box {
     -fx-fill: transparent;

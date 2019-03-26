@@ -16,6 +16,7 @@ public class DBEntry {
         text.setTranslateX(x+npcName.getPrefWidth());
         npcName.setTranslateX(x);
         text.setMaxWidth(150);
+        text.setId("textField");
         root.getChildren().addAll(text, npcName);
     }
 
