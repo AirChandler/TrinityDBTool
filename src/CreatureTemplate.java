@@ -194,7 +194,7 @@ public class CreatureTemplate {
         } catch (Exception ex){
             npcModel.setVisible(false);
         }
-        npcModel.setTranslateX(1250-npcModel.getWidth());
+        npcModel.setTranslateX(1200-npcModel.getWidth());
         npcModel.setTranslateY(10);
         //Setting the height and width of the arc
         npcModel.setArcWidth(50.0);
