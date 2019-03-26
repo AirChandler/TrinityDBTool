@@ -24,20 +24,35 @@ public class MainInterface {
     public void construct(){
         //Main Menu elements
         StackPane mainMenu = new StackPane();
-        Button[] buttons =  new Button[2];
-        buttons[0] = new Button("Start WoW\n5.4.8 Client");
+        Button[] buttons =  new Button[3];
+        buttons[0] = new Button("Start WoW\n 5.4.8 Server");
         buttons[0].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Runtime.getRuntime().exec("D:\\Users\\chand\\Documents\\World of Warcraft Mists of Pandaria\\Wow-64.exe", null, new File("D:\\Users\\chand\\Documents\\World of Warcraft Mists of Pandaria\\"));
+                    Runtime authServer = Runtime.getRuntime();
+                    Runtime worldServer = Runtime.getRuntime();
+                    authServer.exec("cmd.exe /c cd \""+"C:\\Users\\chand\\Documents\\Personal\\Mists of Pandaria\\Solution\\bin\\RelWithDebInfo"+"\" & start authserver.exe\"");
+                    worldServer.exec("cmd.exe /c cd \""+"C:\\Users\\chand\\Documents\\Personal\\Mists of Pandaria\\Solution\\bin\\RelWithDebInfo"+"\" & start worldserver.exe\"");
                 } catch(IOException ex){
                     System.out.println("Executable could not be started.");
                 }
             }
         });
-        buttons[1] = new Button("Edit WoW\n5.4.8 Database");
+        buttons[1] = new Button("Start WoW\n5.4.8 Client");
         buttons[1].setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Runtime game = Runtime.getRuntime();
+                    game.exec("D:\\Users\\chand\\Documents\\World of Warcraft Mists of Pandaria\\Wow-64.exe", null, new File("D:\\Users\\chand\\Documents\\World of Warcraft Mists of Pandaria\\"));
+                } catch(IOException ex){
+                    System.out.println("Executable could not be started.");
+                }
+            }
+        });
+        buttons[2] = new Button("Edit WoW\n5.4.8 Database");
+        buttons[2].setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 ui.conn = new DBInitialise();
@@ -48,7 +63,7 @@ public class MainInterface {
             buttons[i].setTextAlignment(TextAlignment.CENTER);
             buttons[i].setId("button");
             buttons[i].setPrefSize(250, 150);
-            buttons[i].setTranslateX(340 + i * (buttons[i].getPrefWidth()+100));
+            buttons[i].setTranslateX(190 + i * (buttons[i].getPrefWidth()+100));
             buttons[i].setTranslateY(ui.height/2-(buttons[i].getPrefHeight()/2));
         }
         mainMenu.getChildren().addAll(buttons);

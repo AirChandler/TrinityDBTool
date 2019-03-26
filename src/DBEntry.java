@@ -15,11 +15,11 @@ public class DBEntry {
         npcName.setTranslateY(y);
         text.setTranslateX(x+npcName.getPrefWidth());
         npcName.setTranslateX(x);
-        text.setMaxWidth(200);
+        text.setMaxWidth(150);
         root.getChildren().addAll(text, npcName);
     }
 
-    public String getID() {
+    public String getVal() {
         return text.getCharacters().toString();
     }
 }

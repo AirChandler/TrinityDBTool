@@ -144,4 +144,12 @@ public class DBInitialise {
         }
         return null;
     }
+
+    public void processUpdate(String query){
+        try{
+            conn.createStatement().executeUpdate(query);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
