@@ -16,7 +16,7 @@ public class Launchpad extends Application {
     @Override
     public void stop(){
         try {
-            ui.closeConnection();
+            ui.conn.close();
         } catch (Exception ex) {
             System.out.println("No database connection needed closing.");
         }

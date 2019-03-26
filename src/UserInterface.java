@@ -10,8 +10,8 @@ public class UserInterface {
 
     public UserInterface(Stage w){
         window = w;
-        window.setWidth(1280);
-        window.setHeight(720);
+        window.setWidth(width);
+        window.setHeight(height);
         constructMainInterface();
     }
 
@@ -21,10 +21,6 @@ public class UserInterface {
 
     public void constructDBInterface(){
         DBInterface dbUI = new DBInterface(this);
-    }
-
-    public void closeConnection(){
-        conn.close();
     }
 
 }

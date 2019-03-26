@@ -312,7 +312,7 @@ public class CreatureTemplate {
                         "mechanic_immune_mask = "+mechImmune.getVal()+"," +
                         "flags_extra = "+flagsEx.getVal()+"," +
                         "ScriptName = \""+script.getVal()+"\"," +
-                        "WDBVerified = \""+wdbVersion.getVal()+"\" WHERE entry = "+ id +"";
+                        "WDBVerified = \""+wdbVersion.getVal()+"\" WHERE entry = "+ id +";";
                 conn.processUpdate(statement);
             }
         });
