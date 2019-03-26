@@ -90,9 +90,6 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
-.text-field:focused{
-     -fx-focus-color: transparent;
-}
 #box {
     -fx-fill: transparent;
 }
