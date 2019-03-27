@@ -66,8 +66,8 @@ public class DBInterface {
         });
         back.setId("MenuButton");
         back.setPrefSize(200, 50);
-        back.setTextAlignment(TextAlignment.CENTER);
-        tabs.setTranslateY(back.getPrefHeight()+5);
+        back.setTranslateX(-2);
+        tabs.setTranslateY(back.getPrefHeight()+2);
         //Box Background
         Rectangle box = new Rectangle();
         box.setTranslateY(tabs.getTranslateY());
@@ -127,7 +127,6 @@ public class DBInterface {
     private void creature(String guid){
         subMenu[1] = new StackPane();
         subMenu[1].setAlignment(Pos.TOP_LEFT);
-        subMenu[1].setPrefHeight(1500);
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(subMenu[1]);
         tab[1].setContent(scrollPane);
