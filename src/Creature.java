@@ -6,10 +6,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import static javafx.scene.paint.Color.rgb;
 
 public class Creature {

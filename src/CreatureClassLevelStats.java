@@ -10,41 +10,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import static javafx.scene.paint.Color.rgb;
 
-public class CreatureAddon {
+public class CreatureClassLevelStats {
 
     StackPane pane;
     DBInitialise conn;
-    String gId;
+    String level;
+    String classType;
     //Text Entries
-    DBEntry guid;
-    DBEntry pathId;
-    DBEntry mount;
-    DBEntry bytes1;
-    DBEntry bytes2;
-    DBEntry emote;
-    DBEntry auras;
+    DBEntry lvl;
+    DBEntry classT;
+    DBEntry oldContentBaseHp;
+    DBEntry currentContentBaseHp;
+    DBEntry baseMana;
+    DBEntry baseArmor;
 
 
-    public CreatureAddon(StackPane p, String entry, DBInitialise c) {
+    public CreatureClassLevelStats(StackPane p, String l, String cT, DBInitialise c) {
         pane = p;
         conn = c;
-        gId = entry;
+        level = l;
+        classType = cT;
         construct();
     }
 
     private void construct() {
         //Text Entries
-        guid = new DBEntry(pane, "NPC GUID: ", gId, 10, 10);
-        String statement = "SELECT * FROM creature_addon WHERE guid = " + gId;
+        lvl = new DBEntry(pane, "NPC Level: ", level, 10, 10);
+        classT = new DBEntry(pane, "NPC Class: ", classType, 10, 40);
+        String statement = "SELECT * FROM creature_classlevelstats WHERE level = "+level+" AND class = "+classType+";";
         ResultSet rows = conn.processQuery(statement);
         try {
             while (rows.next()) {
-                pathId = new DBEntry(pane, "NPC Waypoint Path id: ", Integer.toString(rows.getInt("path_id")), 10, 90);
-                mount = new DBEntry(pane, "NPC Mount Model id: ", Integer.toString(rows.getInt("mount")), 10, 150);
-                bytes1 = new DBEntry(pane, "NPC Visual Effect (Bytes 1): ", Integer.toString(rows.getInt("bytes1")), 10, 210);
-                bytes2 = new DBEntry(pane, "NPC Visual Effect (Bytes 2): ", Integer.toString(rows.getInt("bytes2")), 10, 240);
-                emote = new DBEntry(pane, "NPC Emote id: ", Integer.toString(rows.getInt("emote")), 500, 90);
-                auras = new DBEntry(pane, "NPC Aura Effects: ", rows.getString("auras"), 500, 150);
+                oldContentBaseHp = new DBEntry(pane, "NPC Old Content Base Hp: ", Integer.toString(rows.getInt("OldContentBaseHP")), 10, 90);
+                currentContentBaseHp = new DBEntry(pane, "NPC Current Content Base Hp: ", Integer.toString(rows.getInt("CurrentContentBaseHP")), 10, 120);
+                baseMana = new DBEntry(pane, "NPC Base Mana: ", Integer.toString(rows.getInt("basemana")), 500, 90);
+                baseArmor = new DBEntry(pane, "NPC Base Armor: ", Integer.toString(rows.getInt("basearmor")), 500, 120);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -54,7 +54,8 @@ public class CreatureAddon {
         search.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gId = guid.getVal();
+                level = lvl.getVal();
+                classType = classT.getVal();
                 construct();
             }
         });
@@ -70,13 +71,12 @@ public class CreatureAddon {
             @Override
             public void handle(ActionEvent event) {
                 String statement = "UPDATE creature SET " +
-                        "guid = " + guid.getVal() + "," +
-                        "path_id = " +pathId.getVal() + "," +
-                        "mount = " + mount.getVal() + "," +
-                        "bytes1 = " + bytes1.getVal() + "," +
-                        "bytes2 = " + bytes2.getVal() + "," +
-                        "emote = " + emote.getVal() + "," +
-                        "auras = \"" + auras.getVal() + "\" WHERE guid = " + gId + ";";
+                        "level = " + lvl.getVal() + "," +
+                        "class = " +classT.getVal() + "," +
+                        "OldContentBaseHP = " + oldContentBaseHp.getVal() + "," +
+                        "CurrentContentBaseHP = " + currentContentBaseHp.getVal() + "," +
+                        "basemana = " + baseMana.getVal() + "," +
+                        "basearmor = " + baseArmor.getVal() + " WHERE level = " + level + " AND class = " + classType + ";";
                 conn.processUpdate(statement);
             }
         });
