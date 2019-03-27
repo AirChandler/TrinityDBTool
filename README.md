@@ -3,7 +3,7 @@ A W.I.P Cross Platform Trinity Core tool used to simplify editing of database ta
 
 ![Home Screen](https://i.imgur.com/S4pNarl.jpg)
 
-![Editing Screen](https://i.imgur.com/dn3928X.jpg)
+![Editing Screen](https://i.imgur.com/ApLJyA4.jpg)
 
 Tool inspired by Gummy52's Creature Manager for The Burning Crusade (Felmyst) core.
 
