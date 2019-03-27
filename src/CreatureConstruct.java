@@ -11,6 +11,7 @@ public class CreatureConstruct {
             new Tab("Creature"),
             new Tab("Creature Addon"),
             new Tab("Creature Class Level Stats"),
+            new Tab("Creature Equip Template"),
             new Tab("Creature Template")
     };
     StackPane[] subTabMenu = new StackPane[subTab.length];
@@ -24,6 +25,7 @@ public class CreatureConstruct {
         creature("168289");
         creature_addon("17");
         creature_classlvlstats("1", "1");
+        creature_equip_template("197");
         creature_template("197");
     }
 
@@ -53,15 +55,22 @@ public class CreatureConstruct {
         subTab[2].setContent(scrollPane);
         CreatureClassLevelStats creatureClassLevelStats = new CreatureClassLevelStats(subTabMenu[2], level, classType, ui.conn);
     }
-
-    private void creature_template(String id){
+    private void creature_equip_template(String id){
         subTabMenu[3] = new StackPane();
         subTabMenu[3].setAlignment(Pos.TOP_LEFT);
-        subTabMenu[3].setPrefHeight(1550);
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(subTabMenu[3]);
         subTab[3].setContent(scrollPane);
-        CreatureTemplate template = new CreatureTemplate(subTabMenu[3], id, ui.conn);
+        CreatureEquipTemplate creatureClassLevelStats = new CreatureEquipTemplate(subTabMenu[3], id, ui.conn);
+    }
+    private void creature_template(String id){
+        subTabMenu[4] = new StackPane();
+        subTabMenu[4].setAlignment(Pos.TOP_LEFT);
+        subTabMenu[4].setPrefHeight(1550);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(subTabMenu[4]);
+        subTab[4].setContent(scrollPane);
+        CreatureTemplate template = new CreatureTemplate(subTabMenu[4], id, ui.conn);
     }
 
 }
