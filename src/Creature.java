@@ -48,7 +48,7 @@ public class Creature {
 
     private void construct(){
         //Text Entries
-        guid = new DBEntry(pane, "NPC Entry ID: ", gId, 10, 10);
+        guid = new DBEntry(pane, "NPC GUID: ", gId, 10, 10);
         String statement = "SELECT * FROM creature WHERE guid = " + gId;
         ResultSet rows = conn.processQuery(statement);
         try {
