@@ -38,22 +38,10 @@ public class DBInterface {
         tabs.setMinSize(ui.width, ui.height-tabs.getTranslateY());
         tabs.setMaxSize(ui.width, ui.height-tabs.getTranslateY());
         tabs.getTabs().addAll(tab);
-        //Default tab
+        //Default tab values on first start up.
         creature_template("197");
+        creature("168289");
         tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-        tabs.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Tab>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-                        switch(t1.getText()){
-                            case "Creature":
-                                creature("168289");
-                            case "Creature Template":
-                                creature_template("197");
-                        }
-                    }
-                }
-        );
         //BackButton
         Button back = new Button("◄ Main Menu");
         back.setOnAction(new EventHandler<ActionEvent>() {
