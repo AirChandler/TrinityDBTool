@@ -46,7 +46,7 @@ public class CreatureAddon {
                 bytes1 = new DBEntry(pane, "NPC Visual Effect (Bytes 1): ", Integer.toString(rows.getInt("bytes1")), 10, 210);
                 bytes2 = new DBEntry(pane, "NPC Visual Effect (Bytes 2): ", Integer.toString(rows.getInt("bytes2")), 10, 240);
                 emote = new DBEntry(pane, "NPC Emote id: ", Integer.toString(rows.getInt("emote")), 500, 90);
-                auras = new DBEntry(pane, "NPC Aura Effects: ", Integer.toString(rows.getInt("bytes1")), 500, 150);
+                auras = new DBEntry(pane, "NPC Aura Effects: ", rows.getString("auras"), 500, 150);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
