@@ -98,6 +98,10 @@ public class DBInterface {
         Scale scale = new Scale(ui.windowScene.getWidth()/ui.width, ui.windowScene.getHeight()/ui.height, 0, 0);
         mainMenu.getTransforms().setAll(scale);
         //Construct tabs
+        constructTabs();
+    }
+
+    private void constructTabs(){
         CreatureConstruct creature = new CreatureConstruct(ui, tab[0]);
     }
 

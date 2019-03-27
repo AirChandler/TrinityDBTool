@@ -69,7 +69,7 @@ public class CreatureAddon {
         update.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String statement = "UPDATE creature SET " +
+                String statement = "UPDATE creature_addon SET " +
                         "guid = " + guid.getVal() + "," +
                         "path_id = " +pathId.getVal() + "," +
                         "mount = " + mount.getVal() + "," +

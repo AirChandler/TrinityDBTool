@@ -57,7 +57,7 @@ public class CreatureConstruct {
     private void creature_template(String id){
         subTabMenu[3] = new StackPane();
         subTabMenu[3].setAlignment(Pos.TOP_LEFT);
-        subTabMenu[3].setPrefHeight(1500);
+        subTabMenu[3].setPrefHeight(1550);
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(subTabMenu[3]);
         subTab[3].setContent(scrollPane);

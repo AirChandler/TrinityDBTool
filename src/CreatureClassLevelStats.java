@@ -70,9 +70,9 @@ public class CreatureClassLevelStats {
         update.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String statement = "UPDATE creature SET " +
+                String statement = "UPDATE creature_classlevelstats SET " +
                         "level = " + lvl.getVal() + "," +
-                        "class = " +classT.getVal() + "," +
+                        "class = " + classT.getVal() + "," +
                         "OldContentBaseHP = " + oldContentBaseHp.getVal() + "," +
                         "CurrentContentBaseHP = " + currentContentBaseHp.getVal() + "," +
                         "basemana = " + baseMana.getVal() + "," +
