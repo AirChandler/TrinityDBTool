@@ -20,7 +20,8 @@ public class Creature {
     DBEntry id;
     DBEntry map;
     DBEntry spawnMask;
-    DBEntry phaseMask;
+    DBEntry phaseId;
+    DBEntry phaseGroup;
     DBEntry modelId;
     DBEntry equipmentId;
     DBEntry posX;
@@ -54,9 +55,10 @@ public class Creature {
                 id = new DBEntry(pane, "NPC Entry id: ", Integer.toString(rows.getInt("id")), 10, 90);
                 map = new DBEntry(pane, "Map: ", Integer.toString(rows.getInt("map")), 10, 150);
                 spawnMask = new DBEntry(pane, "Spawn Mask: ", Integer.toString(rows.getInt("spawnMask")), 10, 210);
-                phaseMask = new DBEntry(pane, "Phase Mask: ", Integer.toString(rows.getInt("phaseMask")), 10, 240);
-                modelId = new DBEntry(pane, "Model id: ", Integer.toString(rows.getInt("modelid")), 10, 300);
-                equipmentId = new DBEntry(pane, "Equipment id: ", Integer.toString(rows.getInt("equipment_id")), 10, 330);
+                phaseId = new DBEntry(pane, "Phase id: ", Integer.toString(rows.getInt("phaseId")), 10, 240);
+                phaseGroup = new DBEntry(pane, "Phase Group: ", Integer.toString(rows.getInt("phaseGroup")), 10, 270);
+                modelId = new DBEntry(pane, "Model id: ", Integer.toString(rows.getInt("modelid")), 10, 330);
+                equipmentId = new DBEntry(pane, "Equipment id: ", Integer.toString(rows.getInt("equipment_id")), 10, 360);
                 posX = new DBEntry(pane, "Position X: ", Float.toString(rows.getFloat("position_x")), 500, 90);
                 posY = new DBEntry(pane, "Position Y: ", Float.toString(rows.getFloat("position_y")), 500, 120);
                 posZ = new DBEntry(pane, "Position Z: ", Float.toString(rows.getFloat("position_z")), 500, 150);
@@ -101,7 +103,8 @@ public class Creature {
                         "id = "+id.getVal()+"," +
                         "map = "+map.getVal()+"," +
                         "spawnMask = "+spawnMask.getVal()+"," +
-                        "phaseMask = "+phaseMask.getVal()+"," +
+                        "phaseId = "+phaseId.getVal()+"," +
+                        "phaseGroup = "+phaseGroup.getVal()+"," +
                         "modelid = "+modelId.getVal()+"," +
                         "equipment_id = "+equipmentId.getVal()+"," +
                         "position_x = "+posX.getVal()+"," +

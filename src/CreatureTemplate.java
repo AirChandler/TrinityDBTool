@@ -122,7 +122,7 @@ public class CreatureTemplate {
                 speedW = new DBEntry(pane, "Walk Speed: ", Float.toString(rows.getFloat("speed_walk")), 900, 360);
                 speedR = new DBEntry(pane, "Run Speed: ", Float.toString(rows.getFloat("speed_run")), 900, 390);
                 npcS = new DBEntry(pane, "NPC Scale Size: ", Float.toString(rows.getFloat("scale")), 500, 480);
-                npcRank = new DBEntry(pane, "NPC Power Rank: ", Integer.toString(rows.getInt("rank")), 900, 450);
+                npcRank = new DBEntry(pane, "NPC Power Rank: ", Integer.toString(rows.getInt("npc_rank")), 900, 450);
                 minDamage = new DBEntry(pane, "Min Damage: ", Float.toString(rows.getFloat("mindmg")), 900, 510);
                 maxDamage = new DBEntry(pane, "Max Damage: ", Float.toString(rows.getFloat("maxdmg")), 900, 540);
                 dmgSchoolType = new DBEntry(pane, "NPC Damage School Type: ", Integer.toString(rows.getInt("dmgschool")), 10, 540);
@@ -247,7 +247,7 @@ public class CreatureTemplate {
                         "speed_walk = "+speedW.getVal()+"," +
                         "speed_run = "+speedR.getVal()+"," +
                         "scale = "+npcS.getVal()+"," +
-                        "rank = "+npcRank.getVal()+"," +
+                        "npc_rank = "+npcRank.getVal()+"," +
                         "mindmg = "+minDamage.getVal()+"," +
                         "maxdmg = "+maxDamage.getVal()+"," +
                         "dmgschool = "+dmgSchoolType.getVal()+"," +

@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DBInitialise {
     // db parameters
-    String url       = "jdbc:mysql://localhost:3306/world";
+    String url       = "jdbc:mysql://localhost:3306/world?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     String user      = "root";
     String password  = "root";
     Connection conn = null;

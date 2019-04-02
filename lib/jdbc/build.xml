@@ -1576,6 +1576,6 @@ See also com.mysql.cj.conf.PropertyDefinitions.SYSP_* variables for other test o
             </fileset>
         </move>
     </target>
-
+	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/test?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 
 </project>

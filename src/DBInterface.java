@@ -24,7 +24,7 @@ public class DBInterface {
     TabPane tabs = new TabPane();
     Tab[] tab = {
             new Tab("Creature"),
-            new Tab("Quest")
+            new Tab("Gossip")
     };
     StackPane mainMenu = new StackPane();
     public DBInterface(UserInterface t){
@@ -102,6 +102,7 @@ public class DBInterface {
     }
 
     private void constructTabs(){
+        GossipConstruct gossip = new GossipConstruct(ui, tab[1]);
         CreatureConstruct creature = new CreatureConstruct(ui, tab[0]);
     }
 
