@@ -32,9 +32,10 @@ public class MainInterface {
                 try {
                     Runtime authServer = Runtime.getRuntime();
                     Runtime worldServer = Runtime.getRuntime();
-                    authServer.exec("cmd.exe /c cd \""+"C:\\Users\\chand\\Documents\\Personal\\Mists of Pandaria\\Solution\\bin\\RelWithDebInfo"+"\" & start authserver.exe\"");
-                    worldServer.exec("cmd.exe /c cd \""+"C:\\Users\\chand\\Documents\\Personal\\Mists of Pandaria\\Solution\\bin\\RelWithDebInfo"+"\" & start worldserver.exe\"");
-                } catch(IOException ex){
+                    // Define server path
+                    authServer.exec("cmd.exe /c cd \""+"D:\\Work\\Mists of Pandaria Emulator\\bin\\RelWithDebInfo"+"\" & start authserver.exe\"");
+                    worldServer.exec("cmd.exe /c cd \""+"D:\\Work\\Mists of Pandaria Emulator\\bin\\RelWithDebInfo"+"\" & start worldserver.exe\"");
+                } catch(Exception ex){
                     System.out.println("Executable could not be started.");
                 }
             }
@@ -45,8 +46,9 @@ public class MainInterface {
             public void handle(ActionEvent event) {
                 try {
                     Runtime game = Runtime.getRuntime();
-                    game.exec("D:\\Users\\chand\\Documents\\World of Warcraft Mists of Pandaria\\Wow-64.exe", null, new File("D:\\Users\\chand\\Documents\\World of Warcraft Mists of Pandaria\\"));
-                } catch(IOException ex){
+                    // Define client path
+                    game.exec("D:\\Games\\World of Warcraft Mists of Pandaria\\_Wow-64.exe", null, new File("D:\\Games\\World of Warcraft Mists of Pandaria\\"));
+                } catch(Exception ex){
                     System.out.println("Executable could not be started.");
                 }
             }
