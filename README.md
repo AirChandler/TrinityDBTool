@@ -9,7 +9,7 @@ Tool inspired by Gummy52's Creature Manager for The Burning Crusade (Felmyst) co
 
 Tool is still in early development and not recommended for personal use, watch out for future releases under releases.
 
--Future Development
-	- Complete Interface for manipulation of all DB Tables
-	- Support for <= 3.3.5 Trinity Core db schema as well as expanding current db support to Trinity Core cata+ (current master)
-	- Interface rehaul, abstraction over raw values: user friendly explanations & editing of values such as changing a npc in creature_tempalate etc.
+	- Future Development
+		- Complete Interface for manipulation of all DB Tables
+		- Support for <= 3.3.5 Trinity Core db schema as well as expanding current db support to Trinity Core cata+ (current master)
+		- Interface rehaul, abstraction over raw values: user friendly explanations & editing of values such as changing a npc in creature_tempalate etc.
